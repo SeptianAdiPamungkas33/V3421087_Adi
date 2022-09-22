@@ -108,6 +108,7 @@ if (isset($_POST["Edit"])) {
  // Post Data
  if (isset($_POST['submit']) ){
 
+    $id_penduduk = $_POST['id_penduduk'];
     $nik = $_POST['nik'];
     $nama = $_POST['nama'];
     $kelamin = $_POST['kelamin'];
@@ -121,9 +122,9 @@ if (isset($_POST["Edit"])) {
     
 
     $penduduk_post = new penduduk();
-    $penduduk_post->tambahpenduduk($koneksi,$nik,$nama,$kelamin,$alamat,$status,$pekerjaan,$kewarganegaraan,$tempatlahir,$tanggallahir,$golongandarah);
-    $data_penduduk_db = $penduduk_post->ambildata_penduduk($koneksi);
+    $penduduk_post->update_data($koneksi,$id_penduduk, $nik,$nama,$kelamin,$alamat,$status,$pekerjaan,$kewarganegaraan,$tempatlahir,$tanggallahir,$golongandarah);
 
+    header("Location: data_penduduk.php");
    } 
 
   if (isset($_POST['Hapus'])){
@@ -324,6 +325,7 @@ if (isset($_POST["Edit"])) {
               <div class="card-body">
                 <!-- Date dd/mm/yyyy -->
                 <form action="" method="post">
+                  <input type="hidden" name="id_penduduk" value="<?= $semua_data['id_penduduk']?>">
                   <div class="form-group">
                     <label for="nik">NIK</label>
                     <input type="number" class="form-control" id="nik" value="<?= $semua_data["nik"];?>" name='nik' placeholder="Enter NIK" required>
